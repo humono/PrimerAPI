@@ -1,5 +1,6 @@
 package com.example.primerapi;
 
+import android.util.JsonReader;
 import android.util.Log;
 
 import java.io.IOException;
@@ -23,7 +24,23 @@ public class Peticion extends Thread {
             if (conn.getResponseCode() == 200) {                  // SI EL CÓDIGO DEVUELTO ES 200 LA RESPUESTA ES CORRECTA
                 InputStream is = conn.getInputStream();
                 InputStreamReader isr = new InputStreamReader(is, "UTF-8");
-                Log.v("Json", isr.toString());
+                JsonReader jr = new JsonReader(isr);
+                //Log.v("Json", isr.toString());
+                //          Empiezo a leer el objeto del Json
+                jr.beginObject();
+                //          NextName solo lee el nombre de la clave, no avanza el puntero.
+                // String clave = jr.nextName();
+                //          SkipValue salta el valor siguiente.
+                // jr.skipValue();
+                //          Con next string leo el siguiente valor y avanzo el puntero.
+
+                //          Voy leyendo el Json y recupero la clavve-valor y la imprimo en el Log.
+                while (jr.hasNext()) {
+                    String clave = jr.nextName();
+                    String valor = jr.nextString();
+                    Log.v("elemento", clave + " - " + valor);
+                }
+                jr.endObject();
             }
         } catch (MalformedURLException mue) {
             mue.printStackTrace();
