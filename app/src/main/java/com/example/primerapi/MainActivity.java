@@ -20,7 +20,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Peticion p = new Peticion();         // Creamos un hilo Petición para poder recuperar la información de una API sin parar el Activity
-        p.start();
+//        Peticion p = new Peticion();         // Creamos un hilo Petición para poder recuperar la información de una API sin parar el Activity
+ //       p.start();
+
+        PeticionEjercicio pe = new PeticionEjercicio();
+        pe.start();
     }
 }
